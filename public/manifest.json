@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Сервис «Место»",
+  "name": "Веб-приложение с фотографиями разных мест от разных людей. Сделано на React JS",
   "icons": [
     {
       "src": "favicon.ico",
