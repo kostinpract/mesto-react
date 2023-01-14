@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Api from '../utils/Api';
 import Card from './Card';
 
 function Main(props) {
 
-  const [userName, setUserName] = React.useState('Жак-Ив Кусто');
-  const [userDescription, setUserDescription] = React.useState('Исследователь океана');
-  const [userAvatar, setUserAvatar] = React.useState('./images/userpic.jpg');
-  const [cards, setCards] = React.useState([]);
+  const [userName, setUserName] = useState('Жак-Ив Кусто');
+  const [userDescription, setUserDescription] = useState('Исследователь океана');
+  const [userAvatar, setUserAvatar] = useState('./images/userpic.jpg');
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     Promise.all([
       Api.getUserInfo(),
       Api.getInitialCards()
