@@ -64,6 +64,14 @@ class Api {
       .then(res => this._checkResponse(res));
   }
 
+  changeLike(cardId, isLiked) {
+    if (isLiked) {
+      return this.dislikeCard(cardId);
+    } else {
+      return this.likeCard(cardId);
+    }
+  }
+
   addNewCard(name, link) {
     return fetch(this._baseUrl + '/cards', {
       method: 'POST',
