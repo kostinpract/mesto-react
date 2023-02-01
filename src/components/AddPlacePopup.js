@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ onClose, isOpen, onAddPlace }) {
@@ -13,6 +13,12 @@ function AddPlacePopup({ onClose, isOpen, onAddPlace }) {
   function handleLinkChange(e) {
     setLink(e.target.value);
   }
+
+  // очищаем поля при открытии окна
+  useEffect(() => {
+    setTitle('');
+    setLink('');
+  }, [isOpen]);
 
   function handleAddPlaceSubmit(e) {
     e.preventDefault();
@@ -34,6 +40,7 @@ function AddPlacePopup({ onClose, isOpen, onAddPlace }) {
       <input
         id="title"
         onChange={handleTitleChange}
+        value={title}
         name="addcard-card-title"
         type="text"
         required
@@ -46,6 +53,7 @@ function AddPlacePopup({ onClose, isOpen, onAddPlace }) {
       <input
         id="link"
         onChange={handleLinkChange}
+        value={link}
         name="addcard-card-image"
         type="url"
         required

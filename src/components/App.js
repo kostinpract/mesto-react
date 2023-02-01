@@ -22,18 +22,10 @@ function App() {
 
   useEffect(() => {
     Promise.all([
-      Api.getUserInfo()
-    ]).then(([user]) => {
-      setCurrentUser(user);
-    }).catch((error) => {
-      console.log(error);
-    });
-  }, []);
-
-  useEffect(() => {
-    Promise.all([
+      Api.getUserInfo(),
       Api.getInitialCards()
-    ]).then(([apiCards]) => {
+    ]).then(([user, apiCards]) => {
+      setCurrentUser(user);
       setCards([...apiCards]);
     }).catch((error) => {
       console.log(error);
@@ -45,30 +37,43 @@ function App() {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    Api.changeLike(card._id, isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+    Api.changeLike(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      })
+      .catch((error) => {
+        console.log(error);
+      });;
   }
 
   function handleUpdateUser(data) {
-    Api.setUserInfo(data.name, data.about).then((newUserData) => {
-      setCurrentUser(newUserData);
-      closeAllPopups();
-    });
+    Api.setUserInfo(data.name, data.about)
+      .then((newUserData) => {
+        setCurrentUser(newUserData);
+        closeAllPopups();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   function handleUpdateAvatar({ avatar }) {
-    Api.setUserAvatar(avatar).then((newUserData) => {
-      setCurrentUser(newUserData);
-      closeAllPopups();
-    });
+    Api.setUserAvatar(avatar)
+      .then((newUserData) => {
+        setCurrentUser(newUserData);
+        closeAllPopups();
+      });
   }
 
   function handleCardDelete(card) {
     if (card.owner._id === currentUser._id) {
-      Api.removeCard(card._id).then(() => {
-        setCards((state) => state.filter((c) => c._id !== card._id));
-      });
+      Api.removeCard(card._id)
+        .then(() => {
+          setCards((state) => state.filter((c) => c._id !== card._id));
+        })
+        .catch((error) => {
+          console.log(error);
+        });;
     }
   }
 

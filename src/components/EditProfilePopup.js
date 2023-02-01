@@ -15,7 +15,7 @@ function EditProfilePopup({ onClose, isOpen, onUpdateUser }) {
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
@@ -55,7 +55,7 @@ function EditProfilePopup({ onClose, isOpen, onUpdateUser }) {
         maxLength="40"
         className="popup__form-field popup__form-field_data_name"
         onChange={handleNameChange}
-        value={name}
+        value={name || ""}
       />
       <span className="popup__form-warning popup__form-warning_field_name">Вы пропустили это поле.</span>
       <input
@@ -68,7 +68,7 @@ function EditProfilePopup({ onClose, isOpen, onUpdateUser }) {
         maxLength="200"
         className="popup__form-field popup__form-field_data_status"
         onChange={handleDescriptionChange}
-        value={description}
+        value={description || ""}
       />
       <span className="popup__form-warning popup__form-warning_field_status">Вы пропустили это поле.</span>
     </PopupWithForm>
