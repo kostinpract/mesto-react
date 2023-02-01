@@ -57,7 +57,7 @@ function App() {
     });
   }
 
-  function handleUpdateAvatar({avatar}) {
+  function handleUpdateAvatar({ avatar }) {
     Api.setUserAvatar(avatar).then((newUserData) => {
       setCurrentUser(newUserData);
       closeAllPopups();
