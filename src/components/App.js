@@ -43,7 +43,7 @@ function App() {
       })
       .catch((error) => {
         console.log(error);
-      });;
+      });
   }
 
   function handleUpdateUser(data) {
@@ -62,6 +62,9 @@ function App() {
       .then((newUserData) => {
         setCurrentUser(newUserData);
         closeAllPopups();
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
@@ -73,15 +76,19 @@ function App() {
         })
         .catch((error) => {
           console.log(error);
-        });;
+        });
     }
   }
 
   function handleAddPlace(card) {
-    Api.addNewCard(card.name, card.link).then((newCard) => {
-      setCards([newCard, ...cards]);
-      closeAllPopups();
-    });
+    Api.addNewCard(card.name, card.link)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   function handleEditProfileClick() {
